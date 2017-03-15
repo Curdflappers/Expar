@@ -153,7 +153,7 @@ public class GunBehavior : MonoBehaviour
     /// <summary>
     /// The time required to reload this gun
     /// </summary>
-    public float Reload
+    public float ReloadTime
     {
         get
         {
@@ -272,7 +272,7 @@ public class GunBehavior : MonoBehaviour
 
     void StartReload()
     {
-        ReloadRemaining = Reload;
+        ReloadRemaining = ReloadTime;
         IsReloading = true;
     }
 

@@ -133,9 +133,12 @@ public class ExperienceBehavior : MonoBehaviour
             minSize = value;
         }
     }
-
-    // Use this for initialization
-    void Start ()
+    
+    /// <summary>
+    /// Initialize random speed and direction, adjust to parent direction,
+    /// set random rotation
+    /// </summary>
+    void Start()
     {
         float initialSpeed = Random.Range(MinSpeed, MaxSpeed);
         float angleRad = Random.Range(MinAngle, MaxAngle); // random direction of movement
@@ -147,6 +150,9 @@ public class ExperienceBehavior : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360)); // random angle of appearance
 	}
 
+    /// <summary>
+    /// Gradually shrink
+    /// </summary>
     void Update()
     {
         if (timeFull <= 0)
@@ -156,8 +162,6 @@ public class ExperienceBehavior : MonoBehaviour
         }
         else { timeFull -= Time.deltaTime; }
     }
-
-    
 
     /// <summary>
     /// If hits player, remove this from world (collected by player)

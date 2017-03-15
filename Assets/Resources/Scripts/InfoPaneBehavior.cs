@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class InfoPaneBehavior : MonoBehaviour
 {
     GameObject playerObject;
+    bool maxEnemiesSet, maxScrapSet;
+    int maxEnemies, enemies, maxScrap, scrap;
 
     public GameObject PlayerObject
     {
@@ -55,6 +57,8 @@ public class InfoPaneBehavior : MonoBehaviour
 	void Start ()
     {
         PlayerObject = GameObject.FindWithTag("Player");
+        maxEnemiesSet = false;
+        maxScrapSet = false;
 	}
 	
 	/// <summary>
@@ -63,30 +67,40 @@ public class InfoPaneBehavior : MonoBehaviour
 	void Update ()
     {
         if (!PlayerObject) { PlayerObject = GameObject.FindWithTag("Player"); }
-        if (Player && !Player.HasOxygen) // player has no oxygen
-        {
-            UpdatePane("Return to the Oxygen Bubble", 0, Player.BreathLeft, Player.MaxBreath);
-        }
+
+        if (Player && !Player.HasOxygen)
+        { UpdatePane("Return to the Oxygen Bubble", 0, Player.BreathLeft, Player.MaxBreath); }
+
         else if (Gun.IsReloading)
+        { UpdatePane("Reloading", 0, Gun.ReloadTime - Gun.ReloadRemaining, Gun.ReloadTime); }
+
+        else if (Gun.BulletsInClip == 0) // player's gun is empty
+        { UpdatePane("Right Click to Reload"); }
+
+        else if(TimeRemaining > 0)
         {
-            UpdatePane("Reloading", 0, Gun.ReloadRemaining, Gun.Reload);
+            UpdatePane("Survive");
         }
-        // no scrap, no enemies, no time left
-        else if (!GameObject.Find("Scrap") && !GameObject.FindWithTag("Enemy") && TimeRemaining <= 0)
-        {
-            UpdatePane("Return to the Ship");
-        }
-        else if (Gun.BulletsInClip < Gun.Magazine * .5f) // players gun is less than half full
-        {
-            UpdatePane("Right Click to Reload");
-        }
-        else if(TimeRemaining <= 0)
-        {
-            UpdatePane("Eliminate Remaining Enemies");
-        }
-        else // no information to display
-        {
-            UpdatePane("");
+        else  { // no more enemies approaching
+
+            if (GameObject.FindWithTag("Enemy")) { // while there are enemies left
+                if(!maxEnemiesSet)
+                {
+                    maxEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+                    maxEnemiesSet = true;
+                }
+                enemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+                UpdatePane("Eliminate Remaining Enemies", 0, enemies, maxEnemies);
+            }
+
+            else if (GameObject.FindWithTag("Scrap")) { // no enemies, but scrap left
+                if (!maxScrapSet)
+                {
+                    maxScrap = GameObject.FindGameObjectsWithTag("Scrap").Length;
+                    maxScrapSet = true;
+                }
+                scrap = GameObject.FindGameObjectsWithTag("Scrap").Length;
+                UpdatePane("Collect remaining Scrap", 0, scrap, maxScrap); }
         }
     }
 
@@ -97,7 +111,7 @@ public class InfoPaneBehavior : MonoBehaviour
     /// <param name="min">The minimum value of the slider</param>
     /// <param name="value">The value of the slider</param>
     /// <param name="max">The maximum value of the slider</param>
-    void UpdatePane(string text, float min = 0, float value = 1, float max = 1)
+    void UpdatePane(string text = "", float min = 0, float value = 1, float max = 1)
     {
         InfoText = text;
         InfoSlider.minValue = min;

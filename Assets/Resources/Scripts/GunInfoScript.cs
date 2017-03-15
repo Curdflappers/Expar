@@ -33,7 +33,7 @@ public class GunInfoScript : MonoBehaviour
         AdjustTextBox(DescriptionText, gStats.description);
         AdjustTextBox(MagazineSizeText, "Magazine Size: " + gStats.Magazine.ToString());
         AdjustTextBox(FireRateText, "Fire Rate: " + gStats.FireRate.ToString());
-        AdjustTextBox(ReloadTimeText, "Reload Time: " + gStats.Reload.ToString());
+        AdjustTextBox(ReloadTimeText, "Reload Time: " + gStats.ReloadTime.ToString());
         AdjustTextBox(DamageText, "Damage: " + gStats.BulletDamage.ToString());
         AdjustTextBox(KnockbackText, "Knockback: " + gStats.BulletKnockback.ToString());
         if (player.GetComponent<PlayerBehavior>().GunsAvailable.Contains(gun))

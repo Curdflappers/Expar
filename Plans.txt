@@ -1,0 +1,22 @@
+Boss Fights
+	Unique enemies with ranged attacks
+	Lots of explosion
+	Special weapon drops
+	
+More weapons
+	Rocket Launcher
+		Area of effect
+	Grenade Launcher
+		Area of effect
+		Timed explosion or on impact
+	Flamethrower
+		Sets ground on fire
+	
+Achievements
+	
+Traps
+
+Sounds
+
+
+Other survivors?

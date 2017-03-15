@@ -63,7 +63,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         target = GameObject.Find("Player");
         deathByPlayer = false;
-        Exp = (GameObject)Resources.Load("Prefabs/Scrap");
+        Exp = Resources.Load<GameObject>("Prefabs/Scrap");
     }
 
     void SetExperience(GameObject xp)
