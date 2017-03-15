@@ -1,8 +1,5 @@
 # Expar
-My awesome game
-
-Purpose:
-Learn about maintaining data across scenes in Unity, C# data structures and manipulation, have fun
+Made to learn about maintaining data across scenes in Unity, C# data structures and manipulation, have fun
 
 Description:
 Top-down shooter with three types of enemies. Collect scrap from the dead bodies of your robot enemies and use it to build guns. Working proof-of-concept right now, I'll be adding more steadily.
